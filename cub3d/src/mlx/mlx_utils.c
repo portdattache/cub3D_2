@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: broboeuf <broboeuf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 20:28:02 by broboeuf          #+#    #+#             */
-/*   Updated: 2025/07/21 21:19:41 by bcaumont         ###   ########.fr       */
+/*   Updated: 2025/07/21 23:10:23 by broboeuf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	create_color(int t, int r, int g, int b)
  * @param game Structure du jeu
  * @return 0
  */
-static int	handle_keys(int key, t_game *game)
+int	handle_keys(int key, t_game *game)
 {
 	if (key == LEFT_ARROW || key == RIGHT_ARROW)
 	{
@@ -100,9 +100,12 @@ static int	handle_keys(int key, t_game *game)
  */
 void	game_loop(t_game *game)
 {
+	game->has_focus = 1;
 	mlx_do_key_autorepeaton(game->mlx);
 	mlx_hook(game->win, 2, 1L << 0, handle_keys, game);
 	mlx_hook(game->win, 17, (1L << 2), free_game, game);
+	mlx_hook(game->win, 9, (1L << 21), handle_focus_in, game);
+	mlx_hook(game->win, 10, (1L << 23), handle_focus_out, game);
 	mlx_mouse_hide(game->mlx, game->win);
 	mlx_mouse_move(game->mlx, game->win, WIDTH / 2, HEIGHT / 2);
 	mlx_loop_hook(game->mlx, update_game, game);

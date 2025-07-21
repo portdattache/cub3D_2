@@ -6,7 +6,7 @@
 /*   By: broboeuf <broboeuf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 20:27:03 by broboeuf          #+#    #+#             */
-/*   Updated: 2025/07/21 01:36:25 by broboeuf         ###   ########.fr       */
+/*   Updated: 2025/07/21 21:43:27 by broboeuf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,9 @@
 # ifndef M_2_PI
 #  define M_2_PI 6.28318530717958647692
 # endif
+
+# define FOCUS_IN 9
+# define FOCUS_OUT 10
 
 /* --- Dimensions du jeu --- */
 # define WIDTH 1280
@@ -72,8 +75,6 @@
 /* --- Positionnement de la minimap --- */
 # define MINIMAP_SCALE 8
 # define MINIMAP_MARGIN 10
-/* --- Debug --- */
-# define DEBUG 1
 
 /* --- Direction des murs --- */
 enum					e_direction
@@ -161,6 +162,8 @@ typedef struct s_game
 	int					ceiling_color;
 	int					map_width;
 	int					map_height;
+	int					is_focused;
+	int					has_focus;
 	char				**map;
 	t_ray				*rays;
 	t_player			player;
@@ -221,5 +224,11 @@ int						string_array_length(char **array);
 int						mouse_move_hook(int x, int y, t_game *game);
 int						update_game(t_game *game);
 void					draw_minimap(t_game *game);
+int						on_focus_out(t_game *game);
+int						on_focus_out(t_game *game);
+void					init_hooks(t_game *game);
+int						handle_keys(int key, t_game *game);
+int						handle_focus_out(t_game *game);
+int						handle_focus_in(t_game *game);
 
 #endif

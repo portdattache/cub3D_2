@@ -1,0 +1,71 @@
+Projets Intra cub3d Edit
+1 sur 5
+file:///E:/Downloads/Intra Projects/Intra Projects cub3d Edit.html
+(https://profile.intra.42.fr/searches)
+ppipes
+(https://profile.intra.42.fr/)
+N'oubliez pas que la qualité des soutenances, et donc la place de l'école sur le marché du travail, dépendent de vous.
+Les soutenances à distance pendant la crise de la Covid offrent plus de flexibilité pour progresser dans votre cursus, mais elles comportent également davantage de risques de tricherie, d'injustice et de paresse, qui nuisent au développement des compétences de chacun. Nous comptons sur votre maturité
+et votre sagesse lors de ces soutenances à distance pour le bien de toute la communauté.
+ÉCHELLE DU PROJET CUB3D
+(HTTPS://PROJECTS.INTRA.42.FR/PROJECTS
+/CUB3D)
+Vous devez évaluer un étudiant de cette équipe
+au sein du dépôt Git
+Introduction
+Veuillez respecter les règles suivantes :
+- Restez poli, courtois, respectueux et constructif
+tout au long du processus d'évaluation. Le bien-être de la communauté
+en dépend.
+- Identifiez avec la personne (ou le groupe) évaluée les éventuels dysfonctionnements du travail. Prenez le temps de discuter
+et de débattre des problèmes que vous avez identifiés.
+- Tenez compte des différences de compréhension entre vos pairs concernant les instructions du projet et l'étendue de ses fonctionnalités. Gardez toujours l'esprit ouvert et notez-le/la aussi honnêtement que possible. La pédagogie n'est valable que si l'évaluation par les pairs est menée avec sérieux.
+Consignes
+- Notez uniquement les travaux qui se trouvent dans le dépôt Git de l'étudiant ou du groupe. - Vérifiez que le dépôt GiT appartient à l'étudiant
+ou au groupe. Assurez-vous que le travail est bien destiné au projet concerné
+et que « git clone » est utilisé dans un dossier vide.
+- Vérifiez soigneusement qu'aucun alias malveillant n'a été utilisé pour vous tromper
+et vous faire évaluer autre chose que le contenu du dépôt officiel.
+- Pour éviter toute mauvaise surprise, vérifiez soigneusement que l'étudiant évaluateur
+et l'étudiant évalué ont examiné les scripts possibles utilisés
+pour faciliter la notation.
+- Si l'étudiant évaluateur n'a pas encore terminé ce projet, il est obligatoire qu'il lise l'intégralité du sujet avant de commencer la soutenance.
+- Utilisez les indicateurs disponibles sur cette échelle pour signaler un dépôt vide, un programme non fonctionnel, une erreur de norme, une tricherie, etc. Dans ces cas, la notation est terminée et la note finale est de 0 (ou -42 en cas de tricherie). Cependant, sauf en cas de tricherie, nous vous encourageons à continuer de discuter de votre travail (même si vous ne l'avez pas terminé) afin d'identifier les problèmes qui auraient pu causer cet échec et d'éviter de reproduire la même erreur.
+- N'oubliez pas que pendant toute la durée de la soutenance, aucune erreur de segmentation,
+12/9/2020, 15:45 Intra Projects cub3d Edit
+2 sur 5
+file:///E:/Downloads/Intra Projects/Intra Projects cub3d Edit.html
+aucun autre arrêt inattendu, prématuré, incontrôlé ou inattendu du programme, sinon la note finale est de 0. Utilisez l'indicateur approprié.
+Vous ne devez jamais modifier de fichier, à l'exception du fichier de configuration, s'il existe.
+Si vous souhaitez modifier un fichier, prenez le temps d'en expliquer les raisons à l'étudiant évalué et assurez-vous que vous êtes tous les deux d'accord.
+- Vous devez également vérifier l'absence de fuites mémoire. Toute mémoire allouée sur le tas doit être correctement libérée avant la fin de l'exécution.
+Vous pouvez utiliser les différents outils disponibles sur votre ordinateur, tels que leaks, valgrind ou e_fence. En cas de fuite mémoire, cochez l'option appropriée. Pièces jointes
+subject.pdf (https://cdn.intra.42.fr/pdf/pdf/11420/en.subject.pdf)
+minilibx_opengl.tgz (https://projects.intra.42.fr/uploads/document/document/1827/minilibx_opengl.tgz)
+minilibx_mms_20200219_beta.tgz (https://projects.intra.42.fr/uploads/document/document
+/1828/minilibx_mms_20200219_beta.tgz)
+Partie obligatoire
+Nom de l'exécutable
+Vérifiez que le projet compile correctement (sans re-link) lorsque vous exécutez la commande « make » et que le nom de l'exécutable est « cub3D ».
+Oui
+Non
+Fichier de configuration
+Vérifiez que vous pouvez configurer TOUS les éléments suivants dans le fichier de configuration.
+Le formatage doit être conforme à la description du sujet.
+- Résolution de l'image/taille de la fenêtre - R
+- Chemin de la texture nord - NO
+- Chemin de la texture est - EA
+- Chemin de la texture sud - SO
+- Chemin de la texture ouest - WE
+- Chemin de la texture du sprite - S
+- Couleur du sol - F
+- Couleur du plafond - C
+- La carte (voir le sujet pour les détails de la configuration de la carte).
+Vérifiez également que le programme renvoie une erreur et se termine correctement lorsque le fichier de configuration est mal configuré (par exemple, une clé inconnue, des clés doubles, un chemin invalide…) ou si le nom du fichier ne se termine pas par l'extension « .cub ».
+Si ce n'est pas le cas, la soutenance est terminée et la note finale sera de 0.
+Oui
+Non
+Éléments techniques de l'affichage
+Nous allons évaluer les éléments techniques de l'affichage. Exécutez le programme et effectuez les 5 tests suivants. Si au moins un échoue, aucun point ne sera attribué pour cette section. Passez à la suivante.
+- Une fenêtre doit s'ouvrir au lancement du programme si l'argument « --save » n'est pas fourni.
+Elle doit rester ouverte pendant l'exécution.
