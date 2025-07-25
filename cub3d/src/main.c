@@ -6,7 +6,7 @@
 /*   By: broboeuf <broboeuf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 20:56:57 by broboeuf          #+#    #+#             */
-/*   Updated: 2025/07/22 00:04:49 by broboeuf         ###   ########.fr       */
+/*   Updated: 2025/07/24 03:39:54 by broboeuf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int	main(int argc, char **argv)
 		free(game.mlx);
 		return (EXIT_FAILURE);
 	}
+	game.has_focus = 1;
 	game_loop(&game);
 	return (0);
 }

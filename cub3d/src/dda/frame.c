@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frame.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: broboeuf <broboeuf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 20:41:40 by broboeuf          #+#    #+#             */
-/*   Updated: 2025/07/21 20:39:42 by broboeuf         ###   ########.fr       */
+/*   Updated: 2025/07/24 00:57:08 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,33 @@ void	draw_frame(t_game *game)
 	draw_image(game);
 	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
+}
+
+// Fonction qui va gerer les mouvements de l'axe de vision par la souris
+// et regle la vitesse de rotation
+int	update_game(t_game *game)
+{
+	int		mouse_x;
+	int		mouse_y;
+	int		center_x;
+	double	angle;
+	double	rot_speed;
+
+	if (!game->has_focus)
+		return (0);
+	center_x = WIDTH / 2;
+	rot_speed = 0.003;
+	mlx_mouse_get_pos(game->mlx, game->win, &mouse_x, &mouse_y);
+	if (mouse_x != center_x)
+	{
+		angle = (mouse_x - center_x) * rot_speed;
+		game->player.dir += angle;
+		if (game->player.dir < 0)
+			game->player.dir += 2 * M_PI;
+		else if (game->player.dir >= 2 * M_PI)
+			game->player.dir -= 2 * M_PI;
+		mlx_mouse_move(game->mlx, game->win, center_x, HEIGHT / 2);
+	}
+	draw_frame(game);
+	return (0);
 }

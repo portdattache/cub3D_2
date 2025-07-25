@@ -6,7 +6,7 @@
 /*   By: broboeuf <broboeuf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 20:35:01 by broboeuf          #+#    #+#             */
-/*   Updated: 2025/07/21 02:47:24 by broboeuf         ###   ########.fr       */
+/*   Updated: 2025/07/24 03:50:13 by broboeuf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,13 @@ int	textures_colors_complete(t_game *game)
 {
 	if (game->floor_color < 0 || game->ceiling_color < 0)
 		return (0);
-	if (!game->tex_north->img || !game->tex_south->img || !game->tex_east->img
-		|| !game->tex_west->img)
+	if (!game->tex_north || !game->tex_north->img)
+		return (0);
+	if (!game->tex_south || !game->tex_south->img)
+		return (0);
+	if (!game->tex_east || !game->tex_east->img)
+		return (0);
+	if (!game->tex_west || !game->tex_west->img)
 		return (0);
 	return (1);
 }
