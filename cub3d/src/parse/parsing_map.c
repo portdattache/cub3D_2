@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: broboeuf <broboeuf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 20:32:13 by broboeuf          #+#    #+#             */
-/*   Updated: 2025/07/19 21:36:35 by bcaumont         ###   ########.fr       */
+/*   Updated: 2025/07/29 01:07:41 by broboeuf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
  * @param game structure principale
  * @return 1 si succès, 0 si erreur
  */
-static int	parse_line(char *line, t_game *game)
+int	parse_line(char *line, t_game *game)
 {
 	static int	max_width = 0;
 	static int	height = 0;
@@ -111,38 +111,6 @@ static int	fill_map_array(char *path, t_game *game)
 		free(line);
 	}
 	close(fd);
-	return (1);
-}
-
-/**
- * Parcourt le fichier pour récupérer textures, couleurs et dimensions
- * @param path chemin du fichier .cub
- * @param game structure du jeu
- * @return 1 si succès, 0 sinon
- */
-static int	scan_map(char *path, t_game *game)
-{
-	int		fd;
-	char	*line;
-	int		err;
-
-	err = 0;
-	fd = open(path, O_RDONLY);
-	if (fd == -1)
-		return (print_error("unable to open map\n", 0));
-	if (!init_game_data(game))
-		return (0);
-	line = "";
-	while (line)
-	{
-		line = get_next_line(fd);
-		if (!err && !parse_line(line, game))
-			err = 1;
-		free(line);
-	}
-	close(fd);
-	if (err)
-		return (free_textures(game));
 	return (1);
 }
 

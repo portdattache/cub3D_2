@@ -33,6 +33,7 @@ SRCS         = \
 	src/parse/colors.c \
 	src/parse/law.c \
 	src/parse/parsing_map.c \
+	src/parse/scan_map.c \
 	src/utils/block.c \
 	src/utils/errors.c \
 	src/utils/free.c \

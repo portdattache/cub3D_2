@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: broboeuf <broboeuf@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 20:56:57 by broboeuf          #+#    #+#             */
-/*   Updated: 2025/07/24 03:39:54 by broboeuf         ###   ########.fr       */
+/*   Updated: 2025/07/22 00:09:45 by bcaumont         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int argc, char **argv)
 {
 	t_game	game;
 
-	ft_memset(&game, 0, sizeof(t_game));
+	ft_memset(&game, 0, (sizeof(t_game)));
 	if (argc != 2)
 		return (print_error("Error: Wrong number of arguments\n",
 				EXIT_FAILURE));

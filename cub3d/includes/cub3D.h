@@ -6,7 +6,7 @@
 /*   By: broboeuf <broboeuf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 20:27:03 by broboeuf          #+#    #+#             */
-/*   Updated: 2025/07/21 21:43:27 by broboeuf         ###   ########.fr       */
+/*   Updated: 2025/07/29 00:30:29 by broboeuf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,5 +230,8 @@ void					init_hooks(t_game *game);
 int						handle_keys(int key, t_game *game);
 int						handle_focus_out(t_game *game);
 int						handle_focus_in(t_game *game);
+int						parse_line(char *line, t_game *game);
+int						scan_map_loop(int fd, t_game *game);
+int						scan_map(char *path, t_game *game);
 
 #endif
