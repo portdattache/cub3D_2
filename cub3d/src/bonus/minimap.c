@@ -6,7 +6,7 @@
 /*   By: broboeuf <broboeuf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 00:31:44 by bcaumont          #+#    #+#             */
-/*   Updated: 2025/07/21 02:45:20 by broboeuf         ###   ########.fr       */
+/*   Updated: 2025/07/31 02:59:23 by broboeuf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,28 @@ static void	draw_square(t_image *img, t_point pos, int size, int color)
 }
 
 /**
- * Dessine les tuiles de la minimap (murs, vides, autres)
+ * Détermine la couleur d'une case de la minimap
+ */
+static int	get_minimap_tile_color(char tile)
+{
+	if (tile == ' ')
+		return (-1);
+	if (tile == '1')
+		return (0xAAAAAA);
+	if (tile == '0' || tile == 'N' || tile == 'S' || tile == 'E' || tile == 'W')
+		return (0x000000);
+	return (0x000000);
+}
+
+/**
+ * Dessine toutes les cases valides de la minimap
  */
 static void	draw_minimap_tiles(t_game *game, int scale)
 {
 	t_point	pos;
+	int		color;
 	int		x;
 	int		y;
-	int		color;
 
 	y = 0;
 	while (y < game->map_height)
@@ -49,15 +63,13 @@ static void	draw_minimap_tiles(t_game *game, int scale)
 		x = 0;
 		while (x < game->map_width)
 		{
-			if (game->map[y][x] == '1')
-				color = 0xAAAAAA;
-			else if (game->map[y][x] == '0')
-				color = 0x000000;
-			else
-				color = 0x333333;
-			pos.x = MINIMAP_MARGIN + x * scale;
-			pos.y = MINIMAP_MARGIN + y * scale;
-			draw_square(&game->screen, pos, scale, color);
+			color = get_minimap_tile_color(game->map[y][x]);
+			if (color != -1)
+			{
+				pos.x = MINIMAP_MARGIN + x * scale;
+				pos.y = MINIMAP_MARGIN + y * scale;
+				draw_square(&game->screen, pos, scale, color);
+			}
 			x++;
 		}
 		y++;

@@ -6,7 +6,7 @@
 /*   By: broboeuf <broboeuf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 20:27:03 by broboeuf          #+#    #+#             */
-/*   Updated: 2025/07/29 00:30:29 by broboeuf         ###   ########.fr       */
+/*   Updated: 2025/07/31 02:49:42 by broboeuf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,17 @@ enum					e_direction
 	WEST
 };
 
+/* --- touches --- */
+typedef struct s_keys
+{
+	int					forward;
+	int					backward;
+	int					left;
+	int					right;
+	int					rot_left;
+	int					rot_right;
+}						t_keys;
+
 /* --- Point simple en 2D --- */
 typedef struct s_point
 {
@@ -153,11 +164,6 @@ typedef struct s_game
 {
 	void				*mlx;
 	void				*win;
-	t_image				screen;
-	t_texture			*tex_north;
-	t_texture			*tex_south;
-	t_texture			*tex_west;
-	t_texture			*tex_east;
 	int					floor_color;
 	int					ceiling_color;
 	int					map_width;
@@ -166,7 +172,14 @@ typedef struct s_game
 	int					has_focus;
 	char				**map;
 	t_ray				*rays;
+	t_keys				keys;
 	t_player			player;
+	t_image				screen;
+	t_texture			*tex_north;
+	t_texture			*tex_south;
+	t_texture			*tex_west;
+	t_texture			*tex_east;
+
 }						t_game;
 
 void					ft_draw_line(t_image *img, t_point p1, t_point p2,
@@ -227,11 +240,13 @@ void					draw_minimap(t_game *game);
 int						on_focus_out(t_game *game);
 int						on_focus_out(t_game *game);
 void					init_hooks(t_game *game);
-int						handle_keys(int key, t_game *game);
 int						handle_focus_out(t_game *game);
 int						handle_focus_in(t_game *game);
 int						parse_line(char *line, t_game *game);
 int						scan_map_loop(int fd, t_game *game);
 int						scan_map(char *path, t_game *game);
+int						key_press(int key, t_game *g);
+int						key_release(int key, t_game *g);
+void					update_player(t_game *g);
 
 #endif

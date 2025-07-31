@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frame.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bcaumont <bcaumont@student.42.fr>          +#+  +:+       +#+        */
+/*   By: broboeuf <broboeuf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 20:41:40 by broboeuf          #+#    #+#             */
-/*   Updated: 2025/07/24 00:57:08 by bcaumont         ###   ########.fr       */
+/*   Updated: 2025/07/31 03:06:37 by broboeuf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,11 @@ static void	raycasting(t_game *game)
 }
 
 /**
- * Génère et affiche une frame complète du jeu
- * @param game structure principale
+ * Initialise une nouvelle image (screen buffer)
+ * Détruit l’ancienne si elle existe
+ * @param game structure principale du jeu
  */
-void	draw_frame(t_game *game)
+static void	init_image(t_game *game)
 {
 	if (game->screen.img)
 	{
@@ -81,37 +82,18 @@ void	draw_frame(t_game *game)
 			&game->screen.line_len, &game->screen.endian);
 	if (!game->screen.addr)
 		free_game(game);
+}
+
+/**
+ * Génère et affiche une frame complète du jeu
+ * Inclut le raycasting, la minimap et le rendu de l’image
+ * @param game structure principale
+ */
+void	draw_frame(t_game *game)
+{
+	init_image(game);
 	raycasting(game);
 	draw_image(game);
 	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->screen.img, 0, 0);
-}
-
-// Fonction qui va gerer les mouvements de l'axe de vision par la souris
-// et regle la vitesse de rotation
-int	update_game(t_game *game)
-{
-	int		mouse_x;
-	int		mouse_y;
-	int		center_x;
-	double	angle;
-	double	rot_speed;
-
-	if (!game->has_focus)
-		return (0);
-	center_x = WIDTH / 2;
-	rot_speed = 0.003;
-	mlx_mouse_get_pos(game->mlx, game->win, &mouse_x, &mouse_y);
-	if (mouse_x != center_x)
-	{
-		angle = (mouse_x - center_x) * rot_speed;
-		game->player.dir += angle;
-		if (game->player.dir < 0)
-			game->player.dir += 2 * M_PI;
-		else if (game->player.dir >= 2 * M_PI)
-			game->player.dir -= 2 * M_PI;
-		mlx_mouse_move(game->mlx, game->win, center_x, HEIGHT / 2);
-	}
-	draw_frame(game);
-	return (0);
 }

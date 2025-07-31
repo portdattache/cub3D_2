@@ -6,7 +6,7 @@
 /*   By: broboeuf <broboeuf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 20:28:02 by broboeuf          #+#    #+#             */
-/*   Updated: 2025/07/21 23:10:23 by broboeuf         ###   ########.fr       */
+/*   Updated: 2025/07/31 02:06:14 by broboeuf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,36 +65,6 @@ int	create_color(int t, int r, int g, int b)
 }
 
 /**
- * Gère les actions clavier pendant la partie
- * @param key Touche pressée
- * @param game Structure du jeu
- * @return 0
- */
-int	handle_keys(int key, t_game *game)
-{
-	if (key == LEFT_ARROW || key == RIGHT_ARROW)
-	{
-		if (key == LEFT_ARROW)
-			game->player.dir -= ROT_SPEED;
-		else
-			game->player.dir += ROT_SPEED;
-		game->player.dir = normalize_angle(game->player.dir);
-		draw_frame(game);
-	}
-	else if (key == FORWARD)
-		move_player_forward(game);
-	else if (key == BACKWARD)
-		move_player_backward(game);
-	else if (key == LEFT)
-		move_player_left(game);
-	else if (key == RIGHT)
-		move_player_right(game);
-	if (key == ESC)
-		free_game(game);
-	return (0);
-}
-
-/**
  * Démarre la boucle principale du jeu avec les hooks MLX
  * @param game Structure du jeu
  */
@@ -102,7 +72,8 @@ void	game_loop(t_game *game)
 {
 	game->has_focus = 1;
 	mlx_do_key_autorepeaton(game->mlx);
-	mlx_hook(game->win, 2, 1L << 0, handle_keys, game);
+	mlx_hook(game->win, 2, 1L << 0, key_press, game);
+	mlx_hook(game->win, 3, 1L << 1, key_release, game);
 	mlx_hook(game->win, 17, (1L << 2), free_game, game);
 	mlx_hook(game->win, 9, (1L << 21), handle_focus_in, game);
 	mlx_hook(game->win, 10, (1L << 23), handle_focus_out, game);

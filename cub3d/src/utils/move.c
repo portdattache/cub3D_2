@@ -6,7 +6,7 @@
 /*   By: broboeuf <broboeuf@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/18 20:51:25 by broboeuf          #+#    #+#             */
-/*   Updated: 2025/07/21 02:54:40 by broboeuf         ###   ########.fr       */
+/*   Updated: 2025/07/31 03:21:18 by broboeuf         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,50 +33,49 @@ static int	is_position_blocked(t_game *game, int x, int y)
 }
 
 /**
- * Déplace le joueur vers l'avant
- * @param game structure principale du jeu
+ * Déplace le joueur vers l'avant avec glissement sur les murs
  */
 void	move_player_forward(t_game *game)
 {
 	double	nx;
 	double	ny;
+	double	s;
 
-	nx = game->player.map_pos.x + cos(game->player.dir) * game->player.speed;
-	ny = game->player.map_pos.y + sin(game->player.dir) * game->player.speed;
-	if (!is_position_blocked(game, nx, ny))
-	{
+	s = game->player.speed;
+	nx = game->player.map_pos.x + cos(game->player.dir) * s;
+	ny = game->player.map_pos.y + sin(game->player.dir) * s;
+	if (!is_position_blocked(game, nx, game->player.map_pos.y))
 		game->player.map_pos.x = nx;
+	if (!is_position_blocked(game, game->player.map_pos.x, ny))
 		game->player.map_pos.y = ny;
-		game->player.pos_x = nx;
-		game->player.pos_y = ny;
-	}
+	game->player.pos_x = game->player.map_pos.x;
+	game->player.pos_y = game->player.map_pos.y;
 	draw_frame(game);
 }
 
 /**
- * Déplace le joueur vers l'arrière
- * @param game structure principale du jeu
+ * Déplace le joueur vers l'arrière avec glissement sur les murs
  */
 void	move_player_backward(t_game *game)
 {
 	double	nx;
 	double	ny;
+	double	s;
 
-	nx = game->player.map_pos.x - cos(game->player.dir) * game->player.speed;
-	ny = game->player.map_pos.y - sin(game->player.dir) * game->player.speed;
-	if (!is_position_blocked(game, nx, ny))
-	{
+	s = game->player.speed;
+	nx = game->player.map_pos.x - cos(game->player.dir) * s;
+	ny = game->player.map_pos.y - sin(game->player.dir) * s;
+	if (!is_position_blocked(game, nx, game->player.map_pos.y))
 		game->player.map_pos.x = nx;
+	if (!is_position_blocked(game, game->player.map_pos.x, ny))
 		game->player.map_pos.y = ny;
-		game->player.pos_x = nx;
-		game->player.pos_y = ny;
-	}
+	game->player.pos_x = game->player.map_pos.x;
+	game->player.pos_y = game->player.map_pos.y;
 	draw_frame(game);
 }
 
 /**
- * Déplace le joueur vers la gauche (strafe gauche)
- * @param game structure principale du jeu
+ * Déplace le joueur vers la gauche (strafe) avec glissement
  */
 void	move_player_left(t_game *game)
 {
@@ -87,19 +86,17 @@ void	move_player_left(t_game *game)
 	s = game->player.speed;
 	nx = game->player.map_pos.x - cos(game->player.dir + M_PI_2) * s;
 	ny = game->player.map_pos.y - sin(game->player.dir + M_PI_2) * s;
-	if (!is_position_blocked(game, nx, ny))
-	{
+	if (!is_position_blocked(game, nx, game->player.map_pos.y))
 		game->player.map_pos.x = nx;
+	if (!is_position_blocked(game, game->player.map_pos.x, ny))
 		game->player.map_pos.y = ny;
-		game->player.pos_x = nx;
-		game->player.pos_y = ny;
-	}
+	game->player.pos_x = game->player.map_pos.x;
+	game->player.pos_y = game->player.map_pos.y;
 	draw_frame(game);
 }
 
 /**
- * Déplace le joueur vers la droite (strafe droite)
- * @param game structure principale du jeu
+ * Déplace le joueur vers la droite (strafe) avec glissement
  */
 void	move_player_right(t_game *game)
 {
@@ -110,12 +107,11 @@ void	move_player_right(t_game *game)
 	s = game->player.speed;
 	nx = game->player.map_pos.x + cos(game->player.dir + M_PI_2) * s;
 	ny = game->player.map_pos.y + sin(game->player.dir + M_PI_2) * s;
-	if (!is_position_blocked(game, nx, ny))
-	{
+	if (!is_position_blocked(game, nx, game->player.map_pos.y))
 		game->player.map_pos.x = nx;
+	if (!is_position_blocked(game, game->player.map_pos.x, ny))
 		game->player.map_pos.y = ny;
-		game->player.pos_x = nx;
-		game->player.pos_y = ny;
-	}
+	game->player.pos_x = game->player.map_pos.x;
+	game->player.pos_y = game->player.map_pos.y;
 	draw_frame(game);
 }

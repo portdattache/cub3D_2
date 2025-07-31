@@ -38,10 +38,12 @@ SRCS         = \
 	src/utils/errors.c \
 	src/utils/free.c \
 	src/utils/init_walls.c \
+	src/utils/keys.c \
 	src/utils/maps.c \
 	src/utils/move.c \
 	src/utils/strings.c\
 	src/bonus/mouse_movements.c\
+	src/bonus/mousse_utils.c \
 	src/bonus/minimap.c
 OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
